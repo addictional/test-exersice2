@@ -24,13 +24,12 @@ export const reducer : Reducer<ITable,IActions> = (state = STATE,action) => {
             return {...state}
         }
         case '@REVERT_USER_DATA' : {
-            const user = state.users.find(({id})=> id === action.payload.id);
-            if(user) {
-                const data = state.history[user.id];
-                user.firstName = data.firstName;
-                user.lastName = data.lastName;
-                user.visits = data.visits;
-            }
+            state.users.forEach((user) => {
+                const history = state.history[user.id];
+                if(history) {
+                    user = {...history};
+                }
+            });
             return {...state};
         }
         default : 

@@ -17,7 +17,6 @@ interface IFetchEndAction {
 
 interface IFetchRevertAction {
     type : REVERT;
-    payload : {id : number}
 }
 
 interface IUpdatableFields {
@@ -58,10 +57,9 @@ function fetchEnd(data : IResponseDTO) : IFetchEndAction {
 }
 
 
-export function revert(id : number) : IFetchRevertAction {
+export function revert() : IFetchRevertAction {
     return {
-        type : '@REVERT_USER_DATA',
-        payload : {id}
+        type : '@REVERT_USER_DATA'
     }
 }
 

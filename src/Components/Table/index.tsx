@@ -11,6 +11,7 @@ export interface IRow extends IResponseRow {
 interface IProps {
     data : Array<IRow>,
     onChange(data : any) :void;
+    onRevert() : void;
 }
 
 export const Table : React.FC<IProps> = (props) => {
@@ -25,6 +26,7 @@ export const Table : React.FC<IProps> = (props) => {
     const onKeyPress  = (e :KeyboardEvent) => {
         if(e.keyCode === 27) {
             reset();
+            props.onRevert();
         }
     }
 
