@@ -35,7 +35,7 @@ interface IFetchUpdateAction {
     payload : IUpdatableFields & INotUpdatableField
 }
 
-export type IActions  = IFetchBeginAction | IFetchEndAction | IFetchUpdateAction;
+export type IActions  = IFetchBeginAction | IFetchEndAction | IFetchRevertAction | IFetchUpdateAction;
 
 type ThunkResult<R> = ThunkAction<
   R,
@@ -57,6 +57,13 @@ function fetchEnd(data : IResponseDTO) : IFetchEndAction {
     }
 }
 
+
+export function revert(id : number) : IFetchRevertAction {
+    return {
+        type : '@REVERT_USER_DATA',
+        payload : {id}
+    }
+}
 
 export function update(data : IUpdatableFields & INotUpdatableField) : IFetchUpdateAction {
     return {
