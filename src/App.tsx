@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Table,IRow} from './Components/Table';
+import {useStore,connect} from 'react-redux';
+import {update} from './Store/Actions';
 
-function App() {
+
+
+
+const App : React.FC<any> = ({update}) => {
+  const store = useStore();
+  const rows =  store.getState().users.map((row : any) => {
+    return {...row,active : false};
+  }) as Array<IRow>;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Table data={rows} onChange={(data)=>{
+        update(data);
+      }}/>
     </div>
   );
 }
 
-export default App;
+const mapDispatchToProps = { update };
+export default connect(null,mapDispatchToProps)(App);
